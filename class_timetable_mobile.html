@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mobile Timetable</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      background-color: #111;
+      color: #fff;
+    }
+
+    .dropdown-container {
+      margin-bottom: 15px;
+    }
+
+    label, select {
+      color: #fff;
+      font-size: 16px;
+    }
+
+    select {
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .accordion {
+      background-color: #222;
+      color: #fff;
+      cursor: pointer;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 16px;
+      transition: 0.3s;
+      margin-bottom: 5px;
+    }
+
+    .active, .accordion:hover {
+      background-color: #333;
+    }
+
+    .panel {
+      padding: 0 14px;
+      display: none;
+      background-color: #000;
+      overflow: hidden;
+    }
+
+    .class-item {
+      padding: 8px 0;
+      border-bottom: 1px solid #333;
+      color: #fff;
+    }
+
+    .highlight {
+      background-color: #FFD54F;
+      color: #000 !important;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dropdown-container">
+  <label for="ageSelect">Select Age:</label>
+  <select id="ageSelect">
+    <option value="">— Show all classes —</option>
+<option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option>
+  </select>
+</div>
+
+<!-- Placeholder for Monday to Saturday Accordions, kept short here -->
+<div class="panel" id="schedule-panels">
+  <p>This is a placeholder. Full content will be added here.</p>
+</div>
+
+<script>
+  const ageClassMap = {
+    2: ['Pre Starlight Creative Movement', 'Pre Starlight Ballet/Tap', 'Pre Starlight Tumble/Jazz'],
+    3: ['Pre Starlight Creative Movement', 'Pre Starlight Ballet/Tap', 'Pre Starlight Tumble/Jazz'],
+    4: ['Pre Starlight Creative Movement', 'Pre Starlight Ballet/Tap', 'Pre Starlight Tumble/Jazz'],
+    5: ['Musical Theatre / Voice Jam', 'Starlight Acro', 'Starlight Ballet', 'Starlight Tap', 'Starlight Commercial', 'Starlight Jazz', 'Starlight Highland'],
+    6: ['Musical Theatre / Voice Jam', 'Starlight Acro', 'Starlight Ballet', 'Starlight Tap', 'Starlight Commercial', 'Starlight Jazz', 'Starlight Highland'],
+    7: ['Level 1 Ballet', 'Level 1 Lyrical', 'Level 1 Tap', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 1 Jazz', 'Level 1 Acro', 'Junior Commercial'],
+    8: ['Level 1 Ballet', 'Level 1 Lyrical', 'Level 1 Tap', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 1 Jazz', 'Level 1 Acro', 'Junior Commercial'],
+    9: ['Level 1 Ballet', 'Level 1 Lyrical', 'Level 1 Tap', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 1 Jazz', 'Level 1 Acro', 'Junior Commercial'],
+    10: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    11: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    12: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    13: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    14: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    15: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    16: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    17: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap'],
+    18: ['Level 2 Lyrical', 'Level 2 Ballet', 'Level 2 Pointe', 'Musical Theatre / Voice Jam', 'Strength & Conditioning', 'Competition Highland', 'National', 'Jumps & Turns', 'Pre Premier Highland', 'Level 2 Acro', 'Senior Commercial', 'Level 2 Jazz', 'Level 2 Tap']
+  };
+
+  document.getElementById('ageSelect').addEventListener('change', function () {
+    const age = parseInt(this.value);
+    const validClasses = ageClassMap[age] || [];
+    const items = document.querySelectorAll('.class-item');
+
+    items.forEach(item => {
+      item.classList.remove('highlight');
+      if (validClasses.includes(item.getAttribute('data-class'))) {
+        item.classList.add('highlight');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
