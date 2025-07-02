@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Caledonia Desktop Timetable</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #111;
+    color: #fff;
+    padding: 20px;
+  }
+  h1 {
+    color: #FFD54F;
+  }
+  select {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #222;
+    color: #fff;
+    border: 1px solid #888;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  th {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #444;
+  }
+  td {
+    background-color: black;
+    color: white;
+    padding: 10px;
+    border: 1px solid #444;
+    text-align: center;
+  }
+  .highlight {
+    background-color: yellow !important;
+    color: black !important;
+  }
+</style>
+</head>
+<body>
+<h1>Weekly Class Schedule</h1>
+<label for="ageSelect">Select Age:</label>
+<select id="ageSelect">
+  <option value="">Show all</option>
+  <option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option>
+</select>
+<table>
+  <thead>
+    <tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>
+  </thead>
+  <tbody>
+<tr><td>9:00 AM – 9:00 PM</td><td></td><td></td><td></td><td></td><td></td><td class="class-cell" data-class="Private Lessons">Private Lessons</td></tr><tr><td>3:45–4:30 PM</td><td></td><td class="class-cell" data-class="Pre Starlight Creative Movement">Pre Starlight Creative Movement</td><td></td><td class="class-cell" data-class="Pre Starlight Ballet/Tap">Pre Starlight Ballet/Tap</td><td class="class-cell" data-class="Pre Starlight Tumble/Jazz">Pre Starlight Tumble/Jazz</td><td></td></tr><tr><td>4:30–5:15 PM</td><td class="class-cell" data-class="Level 1 Ballet">Level 1 Ballet</td><td></td><td class="class-cell" data-class="Starlight Acro">Starlight Acro</td><td class="class-cell" data-class="Level 1 Jazz">Level 1 Jazz</td><td></td><td></td></tr><tr><td>5:15–6:00 PM</td><td class="class-cell" data-class="Level 1 Lyrical">Level 1 Lyrical</td><td class="class-cell" data-class="Musical Theatre / Voice Jam">Musical Theatre / Voice Jam</td><td class="class-cell" data-class="Starlight Ballet">Starlight Ballet</td><td class="class-cell" data-class="Level 1 Acro">Level 1 Acro</td><td class="class-cell" data-class="Starlight Jazz">Starlight Jazz</td><td></td></tr><tr><td>6:00–6:45 PM</td><td class="class-cell" data-class="Level 1 Tap">Level 1 Tap</td><td class="class-cell" data-class="Strength & Conditioning">Strength & Conditioning</td><td class="class-cell" data-class="Starlight Tap">Starlight Tap</td><td class="class-cell" data-class="Junior Commercial">Junior Commercial</td><td class="class-cell" data-class="Starlight Highland">Starlight Highland</td><td></td></tr><tr><td>6:45–7:30 PM</td><td class="class-cell" data-class="Level 2 Lyrical">Level 2 Lyrical</td><td class="class-cell" data-class="Competition Highland">Competition Highland</td><td class="class-cell" data-class="Jumps & Turns">Jumps & Turns</td><td class="class-cell" data-class="Senior Commercial">Senior Commercial</td><td></td><td></td></tr><tr><td>7:30–8:15 PM</td><td class="class-cell" data-class="Level 2 Ballet">Level 2 Ballet</td><td class="class-cell" data-class="National">National</td><td class="class-cell" data-class="Pre Premier Highland">Pre Premier Highland</td><td class="class-cell" data-class="Level 2 Jazz">Level 2 Jazz</td><td></td><td></td></tr><tr><td>8:15–9:00 PM</td><td class="class-cell" data-class="Level 2 Pointe">Level 2 Pointe</td><td></td><td class="class-cell" data-class="Level 2 Acro">Level 2 Acro</td><td class="class-cell" data-class="Level 2 Tap">Level 2 Tap</td><td></td><td></td></tr>
+  </tbody>
+</table>
+<script>
+  const ageMap = {
+    "2": ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    "3": ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    "4": ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    "5": ["Musical Theatre / Voice Jam", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial"],
+    "6": ["Musical Theatre / Voice Jam", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial"],
+    "7": ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial"],
+    "8": ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial"],
+    "9": ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial"],
+    "10": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap", "Junior Commercial"],
+    "11": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "12": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "13": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "14": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "15": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "16": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "17": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"],
+    "18": ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre / Voice Jam", "Strength & Conditioning", "Competition Highland", "National", "Jumps & Turns", "Pre Premier Highland", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap"]
+  };
+  document.getElementById('ageSelect').addEventListener('change', function () {
+    const age = this.value;
+    const eligible = ageMap[age] || [];
+    document.querySelectorAll('.class-cell').forEach(cell => {
+      const cls = cell.dataset.class || '';
+      cell.classList.toggle('highlight', eligible.includes(cls.trim()));
+    });
+  });
+</script>
+</body>
+</html>
