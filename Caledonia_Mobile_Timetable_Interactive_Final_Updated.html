@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Caledonia Performing Arts - Mobile Timetable</title>
+  <style>
+    :root {
+        --primary-bg: #121212;
+        --primary-text: #fff;
+        --highlight-color: #FFD700;
+        --accent-bg: #1e1e1e;
+        --border-color: #333;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: white;
+      padding: 10px;
+    }
+    h2 {
+      color: white;
+      border-bottom: 2px solid white;
+      padding-bottom: 5px;
+    }
+    select {
+      margin: 20px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: white;
+      color: black;
+    }
+    td:empty {
+      background-color: #000;
+    }
+    .highlight {
+      background-color: #FFD700;
+      color: black;
+    }
+  
+    .invitation-only {
+        background-color: orange !important;
+        color: #000;
+        font-weight: bold;
+    }
+    .legend {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: var(--accent-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        color: var(--primary-text);
+    }
+    .legend-box {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: orange;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+
+  
+
+  <label for="ageSelect">Select Age:</label>
+  <select id="ageSelect" onchange="highlightClasses()">
+    <option value="">--Choose Age--</option>
+    <option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+  </select>
+
+  <h2>Monday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Level 1 Ballet</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Level 1 Lyrical</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Level 1 Tap</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Level 2 Lyrical</td></tr>
+<tr><td>7:30–8:15 PM</td><td>Level 2 Ballet</td></tr>
+<tr><td>8:15–9:00 PM</td><td class="invitation-only">Pre Pointe</td></tr></table><h2>Tuesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Creative Movement</td></tr>
+<tr><td>4:30–5:15 PM</td><td>Starlight Jazz</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Musical Theatre</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Strength & Conditioning</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Competition Highland</td></tr>
+<tr><td>7:30–8:15 PM</td><td>National</td></tr></table><h2>Wednesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Starlight Acro</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Starlight Ballet</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Starlight Tap</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Level 2 Jazz</td></tr>
+<tr><td>7:30–8:15 PM</td><td>Level 2 Tap</td></tr></table><h2>Thursday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Ballet/Tap</td></tr>
+<tr><td>4:30–5:15 PM</td><td>Level 1 Jazz</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Level 1 Acro</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Junior Commercial</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Senior Commercial</td></tr>
+<tr><td>7:30–8:15 PM</td><td class="invitation-only">Advanced Acro</td></tr></table><h2>Friday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:15–4:00 PM</td><td>Pre Starlight Tumble/Jazz</td></tr>
+<tr><td>4:30–5:15 PM</td><td class="invitation-only">Pre Premier Highland 2</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Pre Premier Highland 1</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Cheerleading / Pom</td></tr></table><h2>Saturday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>10:45 AM–Onwards</td><td class="invitation-only">Company Rehearsals</td></tr></table>
+
+<script>
+  const classAgeMap = {
+    "Pre Starlight Creative Movement": [2,3,4],
+    "Pre Starlight Ballet/Tap": [2,3,4],
+    "Pre Starlight Tumble/Jazz": [2,3,4],
+    "Starlight Acro": [5,6],
+    "Starlight Ballet": [5,6],
+    "Starlight Tap": [5,6],
+    "Starlight Jazz": [5,6],
+    "Starlight Highland": [5,6],
+    "Musical Theatre": [5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    "Level 1 Ballet": [7,8,9],
+    "Level 1 Lyrical": [7,8,9],
+    "Level 1 Tap": [7,8,9],
+    "Level 1 Jazz": [7,8,9],
+    "Level 1 Acro": [7,8,9],
+    "Junior Commercial": [5,6,7,8,9,10],
+    "Level 2 Lyrical": [10,11,12,13,14,15,16,17,18],
+    "Level 2 Ballet": [10,11,12,13,14,15,16,17,18],
+    "Level 2 Tap": [10,11,12,13,14,15,16,17,18],
+    "Level 2 Jazz": [10,11,12,13,14,15,16,17,18],
+    "Level 2 Acro": [10,11,12,13,14,15,16,17,18],
+    "Senior Commercial": [10,11,12,13,14,15,16,17,18],
+    "Pre Premier Highland 1": [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    "Pre Premier Highland 2": [4,5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    "Cheerleading / Pom": [5,6,7,8,9,10,11,12,13,14,15,16,17,18],
+    "Strength & Conditioning": [7,8,9,10,11,12,13,14,15,16,17,18],
+    "Competition Highland": [7,8,9,10,11,12,13,14,15,16,17,18],
+    "National": [7,8,9,10,11,12,13,14,15,16,17,18],
+    "Jumps & Turns": [7,8,9,10,11,12,13,14,15,16,17,18],
+    "Pre Pointe": [10,11,12,13,14,15,16,17,18],
+    "Advanced Acro": [10,11,12,13,14,15,16,17,18],
+    "Company Rehearsals": [10,11,12,13,14,15,16,17,18]
+  };
+
+  function highlightClasses() {
+    const age = parseInt(document.getElementById("ageSelect").value);
+    document.querySelectorAll("td").forEach(td => {
+      td.classList.remove("highlight");
+      if (classAgeMap[td.textContent] && classAgeMap[td.textContent].includes(age)) {
+        td.classList.add("highlight");
+      }
+    });
+  }
+</script>
+
+
+<div class="legend">
+  <div><span class="legend-box"></span> By invitation only</div>
+</div>
+</body>
+</html>
