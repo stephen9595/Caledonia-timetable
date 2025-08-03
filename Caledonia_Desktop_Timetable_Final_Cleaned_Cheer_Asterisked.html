@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Caledonia Timetable</title>
+<style>
+    :root {
+        --primary-bg: #121212;
+        --primary-text: #fff;
+        --highlight-color: #FFD700;
+        --accent-bg: #1e1e1e;
+        --border-color: #333;
+    }
+    body {
+        background-color: var(--primary-bg);
+        color: var(--primary-text);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    table {
+        width: 100%;
+        background-color: var(--accent-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: center;
+        font-size: 0.95rem;
+    }
+    th {
+        background-color: var(--highlight-color);
+        color: #000;
+        font-weight: 600;
+    }
+    td:empty {
+        background-color: var(--primary-bg);
+    }
+    .highlight {
+        background-color: var(--highlight-color) !important;
+        color: #000;
+        font-weight: bold;
+    }
+    .invitation-only {
+        background-color: orange !important;
+        color: #000;
+        font-weight: bold;
+    }
+    .legend {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: var(--accent-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        color: var(--primary-text);
+    }
+    .legend-box {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: orange;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<div id="age-selector-block">
+<label for="ageSelect" style="display:block;margin-bottom:10px;">Select Age:</label>
+<select id="ageSelect" onchange="highlightClasses()" style="padding:6px;margin-bottom:20px;">
+<option value="">--Select Age--</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+</select>
+</div>
+<table>
+<tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>
+<tr><td>10:45 AM–Onwards</td><td></td><td></td><td></td><td></td><td></td><td>Company Rehearsals*</td></tr>
+<tr><td>3:45–4:30 PM</td><td></td><td>Pre Starlight Creative Movement</td><td></td><td>Pre Starlight Ballet/Tap</td><td>Pre Starlight Tumble/Jazz</td><td></td></tr>
+<tr><td>4:30–5:15 PM</td><td>Level 1 Ballet</td><td>Starlight Jazz</td><td>Starlight Acro</td><td>Level 1 Jazz</td><td>Pre Premier Highland 2*</td><td></td></tr>
+<tr><td>5:15–6:00 PM</td><td>Level 1 Lyrical</td><td>Musical Theatre</td><td>Starlight Ballet</td><td>Level 1 Acro</td><td>Pre Premier Highland 1</td><td></td></tr>
+<tr><td>6:00–6:45 PM</td><td>Level 1 Tap</td><td>Strength &amp; Conditioning</td><td>Starlight Tap</td><td>Junior Commercial</td><td>Cheerleading / Pom</td><td></td></tr>
+<tr><td>6:45–7:30 PM</td><td>Level 2 Lyrical</td><td>Competition Highland*</td><td>Level 2 Jazz</td><td>Senior Commercial</td><td></td><td></td></tr>
+<tr><td>7:30–8:15 PM</td><td>Level 2 Ballet</td><td>National*</td><td>Level 2 Tap</td><td>Advanced Acro*</td><td></td><td></td></tr>
+<tr><td>8:15–9:00 PM</td><td>Pre Pointe*</td><td></td><td></td><td>Advanced Cheer*</td><td></td><td></td></tr>
+</table>
+<div class="legend"><div><strong>*</strong> By invitation only</div></div>
+<script>
+function highlightClasses() {
+  const age = parseInt(document.getElementById("ageSelect").value);
+  document.querySelectorAll("td").forEach(td => td.classList.remove("highlight"));
+  if (!age) return;
+
+  const eligibility = {
+    2: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    3: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    4: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    5: ["Musical Theatre", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial", "Cheerleading / Pom"],
+    6: ["Musical Theatre", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial", "Cheerleading / Pom"],
+    7: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial"],
+    8: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial"],
+    9: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial"]
+  };
+
+  for (let i = 10; i <= 18; i++) {
+    eligibility[i] = ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap", "Cheerleading / Pom", "Advanced Cheer*"];
+  }
+
+  const classes = eligibility[age] || [];
+  document.querySelectorAll("td").forEach(td => {
+    classes.forEach(cls => {
+      if (td.textContent.trim().includes(cls)) {
+        td.classList.add("highlight");
+      }
+    });
+  });
+}</script>
+</body>
+</html>
