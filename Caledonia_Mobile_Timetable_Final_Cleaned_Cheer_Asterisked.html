@@ -147,12 +147,26 @@ function highlightClasses() {
   }
 
   const classes = eligibility[age] || [];
+  const normalize = s => (s || '').replace(/\*+$/,'').trim();
+  const aliasMap = {
+    "Level 1/Level 2 Lyrical": ["Level 1 Lyrical", "Level 2 Lyrical"]
+  };
   document.querySelectorAll("td").forEach(td => {
-    classes.forEach(cls => {
-      if (td.textContent.trim().includes(cls)) {
+    (function(){
+      const rawText = td.textContent.trim();
+      const cellNorm = normalize(rawText);
+      const candidates = (aliasMap[cellNorm] || [cellNorm]).map(normalize);
+      const allowedNorm = classes.map(normalize);
+      if (candidates.some(name => allowedNorm.includes(name))) {
         td.classList.add("highlight");
+        return;
       }
-    });
+      classes.forEach(cls => {
+        if (rawText.includes(cls)) {
+          td.classList.add("highlight");
+        }
+      });
+    })();
   });
 }</script>
 </body>
