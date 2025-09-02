@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Caledonia Performing Arts - Mobile Timetable</title>
+<style>
+    :root {
+        --primary-bg: #121212;
+        --primary-text: #fff;
+        --highlight-color: #FFD700;
+        --accent-bg: #1e1e1e;
+        --border-color: #333;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: white;
+      padding: 10px;
+    }
+    h2 {
+      color: white;
+      border-bottom: 2px solid white;
+      padding-bottom: 5px;
+    }
+    select {
+      margin: 20px 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: white;
+      color: black;
+    }
+    td:empty {
+      background-color: #000;
+    }
+    .highlight {
+      background-color: #FFD700;
+      color: black;
+    }
+  
+    .invitation-only {
+        background-color: orange !important;
+        color: #000;
+        font-weight: bold;
+    }
+    .legend {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: var(--accent-bg);
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        color: var(--primary-text);
+    }
+    .legend-box {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        background-color: orange;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+    </style>
+</head>
+<body>
+<div id="age-selector-block">
+<label for="ageSelect" style="display:block;margin-bottom:10px;">Select Age:</label>
+<select id="ageSelect" onchange="highlightClasses()" style="padding:6px;margin-bottom:20px;">
+<option value="">--Select Age--</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+</select>
+</div>
+<h2>Monday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Level 1 Ballet</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Level 1 Lyrical</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Level 1 Tap</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Level 2 Lyrical</td></tr>
+<tr><td>7:30–8:15 PM</td><td>Level 2 Ballet</td></tr>
+<tr><td>8:15–9:00 PM</td><td>Pre Pointe*</td></tr></table><h2>Tuesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Creative Movement</td></tr>
+<tr><td>4:30–5:15 PM</td><td>Company Rehearsals*</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Musical Theatre</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Strength &amp; Conditioning</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Competition Highland*</td></tr>
+<tr><td>7:30–8:15 PM</td><td>National*</td></tr></table><h2>Wednesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Starlight Acro</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Starlight Ballet</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Starlight Tap</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Level 2 Jazz</td></tr>
+<tr><td>7:30–8:15 PM</td><td>Level 2 Tap</td></tr></table><h2>Thursday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Ballet/Tap</td></tr>
+<tr><td>4:30–5:15 PM</td><td>Level 1 Jazz</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Level 1 Acro</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Junior Commercial</td></tr>
+<tr><td>6:45–7:30 PM</td><td>Senior Commercial</td></tr>
+<tr><td>7:30–8:15 PM</td><td>Advanced Acro*</td></tr><tr><td>8:15–9:00 PM</td><td>Advanced Cheer*</td></tr></table><h2>Friday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>11:00–11:45 AM</td><td>Level 1 Ballet</td></tr><tr><td>11:45 AM–12:30 PM</td><td>Level 1/Level 2 Lyrical</td></tr><tr><td>12:30–1:15 PM</td><td>Level 1 Tap</td></tr><tr><td>1:15–2:00 PM</td><td>Level 2 Ballet</td></tr><tr><td>3:45–4:30 PM</td><td>Starlight Jazz</td></tr>
+<tr><td>4:30–5:15 PM</td><td>Pre Premier Highland 2*</td></tr>
+<tr><td>5:15–6:00 PM</td><td>Pre Premier Highland 1</td></tr>
+<tr><td>6:00–6:45 PM</td><td>Cheerleading / Pom</td></tr></table><h2>Saturday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>10:45 AM–Onwards</td><td>Company Rehearsals*</td></tr></table>
+<div class="legend"><div><strong>*</strong> By invitation only</div></div>
+<script>
+function highlightClasses() {
+  const age = parseInt(document.getElementById("ageSelect").value);
+  document.querySelectorAll("td").forEach(td => td.classList.remove("highlight"));
+  if (!age) return;
+
+  const eligibility = {
+    2: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    3: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
+    4: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz", "Starlight Jazz"],
+    5: ["Musical Theatre", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial", "Cheerleading / Pom"],
+    6: ["Musical Theatre", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial", "Cheerleading / Pom"],
+    7: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom"],
+    8: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom"],
+    9: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom"]
+  };
+
+  for (let i = 10; i <= 18; i++) {
+    eligibility[i] = ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap", "Cheerleading / Pom", "Advanced Cheer*"];
+  }
+
+  const classes = eligibility[age] || [];
+  document.querySelectorAll("td").forEach(td => {
+    classes.forEach(cls => {
+      if (td.textContent.trim().includes(cls)) {
+        td.classList.add("highlight");
+      }
+    });
+  });
+}</script>
+</body>
+</html>
