@@ -125,8 +125,7 @@
 <tr><td>5:15–6:00 PM</td><td>Pre Premier Highland 1</td></tr>
 <tr><td>6:00–6:45 PM</td><td>Cheerleading / Pom</td></tr></table><h2>Saturday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>10:45 AM–Onwards</td><td>Company Rehearsals*</td></tr></table>
 <div class="legend"><div><strong>*</strong> By invitation only</div></div>
-<script>
-function highlightClasses() {
+<script>function highlightClasses() {
   const age = parseInt(document.getElementById("ageSelect").value);
   document.querySelectorAll("td").forEach(td => td.classList.remove("highlight"));
   if (!age) return;
@@ -141,32 +140,24 @@ function highlightClasses() {
     8: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom"],
     9: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom"]
   };
-
   for (let i = 10; i <= 18; i++) {
     eligibility[i] = ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap", "Cheerleading / Pom", "Advanced Cheer*"];
   }
 
-  const classes = eligibility[age] || [];
   const normalize = s => (s || '').replace(/\*+$/,'').trim();
   const aliasMap = {
     "Level 1/Level 2 Lyrical": ["Level 1 Lyrical", "Level 2 Lyrical"]
   };
+
+  const classes = eligibility[age] || [];
+  const allowed = classes.map(normalize);
+
   document.querySelectorAll("td").forEach(td => {
-    (function(){
-      const rawText = td.textContent.trim();
-      const cellNorm = normalize(rawText);
-      const candidates = (aliasMap[cellNorm] || [cellNorm]).map(normalize);
-      const allowedNorm = classes.map(normalize);
-      if (candidates.some(name => allowedNorm.includes(name))) {
-        td.classList.add("highlight");
-        return;
-      }
-      classes.forEach(cls => {
-        if (rawText.includes(cls)) {
-          td.classList.add("highlight");
-        }
-      });
-    })();
+    const cellText = normalize(td.textContent.trim());
+    const candidates = (aliasMap[cellText] || [cellText]).map(normalize);
+    if (candidates.some(name => allowed.includes(name))) {
+      td.classList.add("highlight");
+    }
   });
 }</script>
 </body>
