@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Caledonia Performing Arts - Mobile Timetable</title>
+<title>Caledonia Timetable</title>
 <style>
     :root {
         --primary-bg: #121212;
@@ -13,47 +13,41 @@
         --accent-bg: #1e1e1e;
         --border-color: #333;
     }
-    * {
-        box-sizing: border-box;
-    }
     body {
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: white;
-      padding: 10px;
-    }
-    h2 {
-      color: white;
-      border-bottom: 2px solid white;
-      padding-bottom: 5px;
-    }
-    select {
-      margin: 20px 0;
-      padding: 10px;
-      font-size: 16px;
+        background-color: var(--primary-bg);
+        color: var(--primary-text);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
     }
     table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
+        width: 100%;
+        background-color: var(--accent-bg);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 30px;
+        border-collapse: collapse;
     }
     th, td {
-      border: 1px solid #fff;
-      padding: 10px;
-      text-align: center;
+        border: 1px solid var(--border-color);
+        padding: 12px;
+        text-align: center;
+        font-size: 0.95rem;
     }
     th {
-      background-color: white;
-      color: black;
+        background-color: var(--highlight-color);
+        color: #000;
+        font-weight: 600;
     }
     td:empty {
-      background-color: #000;
+        background-color: var(--primary-bg);
     }
     .highlight {
-      background-color: #FFD700;
-      color: black;
+        background-color: var(--highlight-color) !important;
+        color: #000;
+        font-weight: bold;
     }
-  
     .invitation-only {
         background-color: orange !important;
         color: #000;
@@ -75,7 +69,7 @@
         margin-right: 10px;
         vertical-align: middle;
     }
-    </style>
+  </style>
 </head>
 <body>
 <div id="age-selector-block">
@@ -101,25 +95,17 @@
 <option value="18">18</option>
 </select>
 </div>
-<h2>Monday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Level 1 Ballet</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Level 1 Lyrical</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Level 1 Tap</td></tr>
-<tr><td>6:45–7:30 PM</td><td>Level 2 Lyrical</td></tr>
-<tr><td>7:30–8:15 PM</td><td>Level 2 Ballet</td></tr>
-<tr><td>8:15–9:00 PM</td><td>Pre Pointe*</td></tr></table><h2>Tuesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Creative Movement</td></tr>
-<tr><td>4:30–5:15 PM</td><td>Company Rehearsals*</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Musical Theatre</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Strength &amp; Conditioning</td></tr>
-<tr><td>6:45–7:30 PM</td><td>Competition Highland*</td></tr>
-<tr><td>7:30–8:15 PM</td><td>National*</td></tr></table><h2>Wednesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Starlight Acro</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Starlight Ballet</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Starlight Tap</td></tr>
-<tr><td>6:45–7:30 PM</td><td>Level 2 Jazz</td></tr>
-<tr><td>7:30–8:15 PM</td><td>Level 2 Tap</td></tr></table><h2>Thursday</h2><table><tr><th>Time</th><th>Class</th></tr>
-<tr><td>12:30–1:15 PM</td><td>Level 1/Level 2 Jazz</td></tr><tr><td>1:15–2:00 PM</td><td>Level 1 Acro</td></tr><tr><td>2:00–3:45 PM</td><td></td></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Ballet/Tap</td></tr><tr><td>4:30–5:15 PM</td><td>Level 1 Jazz</td></tr><tr><td>5:15–6:00 PM</td><td>Level 1 Acro</td></tr><tr><td>6:00–6:45 PM</td><td>Junior Commercial</td></tr><tr><td>6:45–7:30 PM</td><td>Senior Commercial</td></tr><tr><td>7:30–8:15 PM</td><td>Advanced Acro*</td></tr><tr><td>8:15–9:00 PM</td><td>Skills and Drills</td></tr></table><h2>Friday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>11:00–11:45 AM</td><td>Level 1 Ballet</td></tr><tr><td>11:45 AM–12:30 PM</td><td>Level 1/Level 2 Lyrical</td></tr><tr><td>12:30–1:15 PM</td><td>Level 1 Tap</td></tr><tr><td>1:15–2:00 PM</td><td>Level 2 Ballet</td></tr><tr><td>2:00–3:45 PM</td><td></td></tr><tr><td>3:45–4:30 PM</td><td>Starlight Jazz</td></tr>
-<tr><td>4:30–5:15 PM</td><td>Pre Premier Highland 2*</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Pre Premier Highland 1</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Cheerleading / Pom</td></tr></table><h2>Saturday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>10:45 AM–Onwards</td><td>Company Rehearsals*</td></tr></table>
+<table>
+<tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th><th>Saturday</th></tr>
+<tr><td>10:45 AM–Onwards</td><td></td><td></td><td></td><td></td><td></td><td>Company Rehearsals*</td></tr>
+<tr><td>11:00–11:45 AM</td><td></td><td></td><td></td><td></td><td>Level 1 Ballet</td><td></td></tr><tr><td>11:45 AM–12:30 PM</td><td></td><td></td><td></td><td></td><td>Level 1/Level 2 Lyrical</td><td></td></tr><tr><td>12:30–1:15 PM</td><td></td><td></td><td></td><td>Level 1/Level 2 Jazz</td><td>Level 1 Tap</td><td></td></tr><tr><td>1:15–2:00 PM</td><td></td><td></td><td></td><td>Level 1 Acro</td><td>Level 2 Ballet</td><td></td></tr><tr><td>2:00–3:45 PM</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3:45–4:30 PM</td><td></td><td>Pre Starlight Creative Movement</td><td></td><td>Pre Starlight Ballet/Tap</td><td>Starlight Jazz</td><td></td></tr>
+<tr><td>4:30–5:15 PM</td><td>Level 1 Ballet</td><td>Company Rehearsals*</td><td>Starlight Acro</td><td>Level 1 Jazz</td><td>Pre Premier Highland 2*</td><td></td></tr>
+<tr><td>5:15–6:00 PM</td><td>Level 1 Lyrical</td><td>Musical Theatre</td><td>Starlight Ballet</td><td>Level 1 Acro</td><td>Pre Premier Highland 1</td><td></td></tr>
+<tr><td>6:00–6:45 PM</td><td>Level 1 Tap</td><td>Strength &amp; Conditioning</td><td>Starlight Tap</td><td>Junior Commercial</td><td>Cheerleading / Pom</td><td></td></tr>
+<tr><td>6:45–7:30 PM</td><td>Level 2 Lyrical</td><td>Competition Highland*</td><td>Level 2 Jazz</td><td>Senior Commercial</td><td></td><td></td></tr>
+<tr><td>7:30–8:15 PM</td><td>Level 2 Ballet</td><td>National*</td><td>Level 2 Tap</td><td>Advanced Acro*</td><td></td><td></td></tr>
+<tr><td>8:15–9:00 PM</td><td>Pre Pointe*</td><td></td><td></td><td>Skills and Drills</td><td></td><td></td></tr>
+</table>
 <div class="legend"><div><strong>*</strong> By invitation only</div></div>
 <script>function highlightClasses() {
   const age = parseInt(document.getElementById("ageSelect").value);
