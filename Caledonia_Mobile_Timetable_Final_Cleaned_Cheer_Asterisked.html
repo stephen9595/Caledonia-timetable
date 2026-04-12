@@ -1,161 +1,261 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Caledonia Performing Arts - Mobile Timetable</title>
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caledonia Timetable Mobile</title>
+  <style>
     :root {
-        --primary-bg: #121212;
-        --primary-text: #fff;
-        --highlight-color: #FFD700;
-        --accent-bg: #1e1e1e;
-        --border-color: #333;
+      --bg: #000000;
+      --panel: #0f0f0f;
+      --grid: #303030;
+      --text: #f5f5f5;
+      --muted: #cfcfcf;
+      --yellow: #f2c200;
+      --orange: #f28c28;
+      --header-text: #000000;
     }
-    * {
-        box-sizing: border-box;
-    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: white;
-      padding: 10px;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
     }
-    h2 {
-      color: white;
-      border-bottom: 2px solid white;
-      padding-bottom: 5px;
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px;
     }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
     select {
-      margin: 20px 0;
-      padding: 10px;
+      background: #111;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 10px;
+      padding: 12px 14px;
       font-size: 16px;
-    }
-    table {
       width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 30px;
+      max-width: 220px;
     }
-    th, td {
-      border: 1px solid #fff;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: white;
-      color: black;
-    }
-    td:empty {
-      background-color: #000;
-    }
-    .highlight {
-      background-color: #FFD700;
-      color: black;
-    }
-  
-    .invitation-only {
-        background-color: orange !important;
-        color: #000;
-        font-weight: bold;
-    }
+
     .legend {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: var(--accent-bg);
-        border-radius: 8px;
-        border: 1px solid var(--border-color);
-        color: var(--primary-text);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 4px;
     }
-    .legend-box {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        background-color: orange;
-        margin-right: 10px;
-        vertical-align: middle;
+
+    .swatch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
-    </style>
+
+    .chip {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      display: inline-block;
+      border: 1px solid #555;
+    }
+
+    .chip.black { background: var(--panel); }
+    .chip.yellow { background: var(--yellow); }
+    .chip.orange { background: var(--orange); }
+
+    .day-block {
+      border: 1px solid var(--grid);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 18px;
+      background: #050505;
+    }
+
+    .day-header {
+      background: var(--yellow);
+      color: var(--header-text);
+      font-weight: 700;
+      font-size: 22px;
+      padding: 14px 16px;
+    }
+
+    .class-row {
+      padding: 10px;
+      border-top: 1px solid var(--grid);
+      background: #050505;
+    }
+
+    .class-box {
+      background: var(--panel);
+      color: var(--text);
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 14px 14px;
+      min-height: 76px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .class-box.yellow {
+      background: var(--yellow);
+      color: #000000;
+      border-color: var(--yellow);
+    }
+
+    .class-box.orange {
+      background: var(--orange);
+      color: #000000;
+      border-color: var(--orange);
+    }
+
+    .class-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .class-time {
+      font-size: 15px;
+      line-height: 1.35;
+      opacity: 0.95;
+    }
+
+    .empty-note {
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 15px;
+      border-top: 1px solid var(--grid);
+    }
+  </style>
 </head>
 <body>
-<div id="age-selector-block">
-<label for="ageSelect" style="display:block;margin-bottom:10px;">Select Age:</label>
-<select id="ageSelect" onchange="highlightClasses()" style="padding:6px;margin-bottom:20px;">
-<option value="">--Select Age--</option>
-<option value="2">2</option>
-<option value="3">3</option>
-<option value="4">4</option>
-<option value="5">5</option>
-<option value="6">6</option>
-<option value="7">7</option>
-<option value="8">8</option>
-<option value="9">9</option>
-<option value="10">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
-<option value="13">13</option>
-<option value="14">14</option>
-<option value="15">15</option>
-<option value="16">16</option>
-<option value="17">17</option>
-<option value="18">18</option>
-</select>
-</div>
-<h2>Monday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Level 1 Ballet</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Level 1 Lyrical</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Level 1 Tap</td></tr>
-<tr><td>6:45–7:30 PM</td><td>Level 2 Lyrical</td></tr>
-<tr><td>7:30–8:15 PM</td><td>Level 2 Ballet</td></tr>
-<tr><td>8:15–9:00 PM</td><td>Pre Pointe*</td></tr></table><h2>Tuesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Ballet/Tap</td></tr>
-<tr><td>4:30–5:15 PM</td><td>Company Rehearsals*</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Musical Theatre</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Strength &amp; Conditioning</td></tr>
-<tr><td>6:45–7:30 PM</td><td>Competition Highland*</td></tr>
-<tr><td>7:30–8:15 PM</td><td>National*</td></tr></table><h2>Wednesday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>4:30–5:15 PM</td><td>Starlight Acro</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Starlight Ballet</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Starlight Tap</td></tr>
-<tr><td>6:45–7:30 PM</td><td>Level 2 Jazz</td></tr>
-<tr><td>7:30–8:15 PM</td><td>Level 2 Tap</td></tr></table><h2>Thursday</h2><table><tr><th>Time</th><th>Class</th></tr>
-<tr><td>12:30–1:15 PM</td><td>Level 1/Level 2 Jazz</td></tr><tr><td>1:15–2:00 PM</td><td>Level 1 Acro</td></tr><tr><td>2:00–3:45 PM</td><td></td></tr><tr><td>3:45–4:30 PM</td><td>Pre Starlight Ballet/Tap</td></tr><tr><td>4:30–5:15 PM</td><td>Level 1 Jazz</td></tr><tr><td>5:15–6:00 PM</td><td>Level 1 Acro</td></tr><tr><td>6:00–6:45 PM</td><td>Junior Commercial</td></tr><tr><td>6:45–7:30 PM</td><td>Senior Commercial</td></tr><tr><td>7:30–8:15 PM</td><td>Advanced Acro*</td></tr><tr><td>8:15–9:00 PM</td><td>Skills and Drills</td></tr></table><h2>Friday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>11:00–11:45 AM</td><td>Level 1 Ballet</td></tr><tr><td>11:45 AM–12:30 PM</td><td>Level 1/Level 2 Lyrical</td></tr><tr><td>12:30–1:15 PM</td><td>Level 1 Tap</td></tr><tr><td>1:15–2:00 PM</td><td>Level 2 Ballet</td></tr><tr><td>2:00–3:45 PM</td><td></td></tr><tr><td>3:45–4:30 PM</td><td>Starlight Jazz</td></tr>
-<tr><td>4:30–5:15 PM</td><td>Pre Premier Highland 2*</td></tr>
-<tr><td>5:15–6:00 PM</td><td>Pre Premier Highland 1</td></tr>
-<tr><td>6:00–6:45 PM</td><td>Cheerleading / Pom</td></tr></table><h2>Saturday</h2><table><tr><th>Time</th><th>Class</th></tr><tr><td>10:45 AM–Onwards</td><td>Company Rehearsals*</td></tr></table>
-<div class="legend"><div><strong>*</strong> By invitation only</div></div>
-<script>function highlightClasses() {
-  const age = parseInt(document.getElementById("ageSelect").value);
-  document.querySelectorAll("td").forEach(td => td.classList.remove("highlight"));
-  if (!age) return;
+  <div class="wrap">
+    <div class="controls">
+      <label for="ageSelect">Select age:</label>
+      <select id="ageSelect">
+        <option value="">Choose age</option>
+      </select>
+      <div class="legend">
+        <span class="swatch"><span class="chip black"></span> Not eligible</span>
+        <span class="swatch"><span class="chip yellow"></span> Eligible without assessment</span>
+        <span class="swatch"><span class="chip orange"></span> Eligible after assessment</span>
+      </div>
+    </div>
 
-  const eligibility = {
-    2: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
-    3: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz"],
-    4: ["Pre Starlight Creative Movement", "Pre Starlight Ballet/Tap", "Pre Starlight Tumble/Jazz", "Starlight Jazz"],
-    5: ["Musical Theatre", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial", "Cheerleading / Pom", "Skills and Drills"],
-    6: ["Musical Theatre", "Starlight Acro", "Starlight Ballet", "Starlight Tap", "Starlight Jazz", "Starlight Highland", "Junior Commercial", "Cheerleading / Pom", "Skills and Drills"],
-    7: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom", "Skills and Drills"],
-    8: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom", "Skills and Drills"],
-    9: ["Level 1 Ballet", "Level 1 Lyrical", "Level 1 Tap", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 1 Jazz", "Level 1 Acro", "Junior Commercial", "Cheerleading / Pom"]
-  };
-  for (let i = 10; i <= 18; i++) {
-    eligibility[i] = ["Level 2 Lyrical", "Level 2 Ballet", "Level 2 Pointe", "Musical Theatre", "Strength & Conditioning", "Competition Highland", "National", "Jumps and Turns", "Pre Premier Highland 1", "Level 2 Acro", "Senior Commercial", "Level 2 Jazz", "Level 2 Tap", "Cheerleading / Pom", "Skills and Drills", "Level 1 Acro"];
-  }
+    <div id="daysContainer"></div>
+  </div>
 
-  const normalize = s => (s || '').replace(/\*+$/,'').trim();
-  const aliasMap = {
-    "Level 1/Level 2 Lyrical": ["Level 1 Lyrical", "Level 2 Lyrical"],
-    "Level 1/Level 2 Jazz": ["Level 1 Jazz", "Level 2 Jazz"]
-  };
+  <script>
+    const classes = [{"title": "Grade 1/2 Ballet", "day": "Monday", "dayOrder": 1, "startTime": "4:30 PM", "endTime": "5:15 PM", "timeLabel": "4:30 PM – 5:15 PM", "minAge": 6, "maxAge": 10, "ageLabel": "Ages 6–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 1}, {"title": "Junior Lyrical", "day": "Monday", "dayOrder": 1, "startTime": "5:15 PM", "endTime": "6:00 PM", "timeLabel": "5:15 PM – 6:00 PM", "minAge": 7, "maxAge": 10, "ageLabel": "Ages 7–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 2}, {"title": "Grade 3/4 Ballet", "day": "Monday", "dayOrder": 1, "startTime": "6:00 PM", "endTime": "6:45 PM", "timeLabel": "6:00 PM – 6:45 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "conditional", "assessmentNote": "Ages 7–10 require assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 3}, {"title": "Senior Lyrical", "day": "Monday", "dayOrder": 1, "startTime": "6:45 PM", "endTime": "7:30 PM", "timeLabel": "6:45 PM – 7:30 PM", "minAge": 10, "maxAge": 18, "ageLabel": "Ages 10–18", "assessmentType": "conditional", "assessmentNote": "Age 10 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 4}, {"title": "Intermediate / Advanced Ballet", "day": "Monday", "dayOrder": 1, "startTime": "7:30 PM", "endTime": "8:15 PM", "timeLabel": "7:30 PM – 8:15 PM", "minAge": 11, "maxAge": 18, "ageLabel": "Ages 11–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 5}, {"title": "Pointe", "day": "Monday", "dayOrder": 1, "startTime": "8:15 PM", "endTime": "9:00 PM", "timeLabel": "8:15 PM – 9:00 PM", "minAge": 11, "maxAge": 18, "ageLabel": "Ages 11–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 6}, {"title": "Pre-Starlight Ballet / Tap", "day": "Tuesday", "dayOrder": 2, "startTime": "3:45 PM", "endTime": "4:30 PM", "timeLabel": "3:45 PM – 4:30 PM", "minAge": 2, "maxAge": 4, "ageLabel": "Ages 2–4", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 7}, {"title": "Starlight Ballet", "day": "Tuesday", "dayOrder": 2, "startTime": "4:30 PM", "endTime": "5:15 PM", "timeLabel": "4:30 PM – 5:15 PM", "minAge": 4, "maxAge": 6, "ageLabel": "Ages 4–6", "assessmentType": "conditional", "assessmentNote": "Age 4 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 8}, {"title": "Starlight Tap", "day": "Tuesday", "dayOrder": 2, "startTime": "5:15 PM", "endTime": "6:00 PM", "timeLabel": "5:15 PM – 6:00 PM", "minAge": 4, "maxAge": 6, "ageLabel": "Ages 4–6", "assessmentType": "conditional", "assessmentNote": "Age 4 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 9}, {"title": "Beginner / Novice Highland", "day": "Tuesday", "dayOrder": 2, "startTime": "6:00 PM", "endTime": "6:45 PM", "timeLabel": "6:00 PM – 6:45 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 10}, {"title": "Highland National", "day": "Tuesday", "dayOrder": 2, "startTime": "6:45 PM", "endTime": "7:30 PM", "timeLabel": "6:45 PM – 7:30 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 11}, {"title": "Intermediate / Premier Prep", "day": "Tuesday", "dayOrder": 2, "startTime": "7:30 PM", "endTime": "8:15 PM", "timeLabel": "7:30 PM – 8:15 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 12}, {"title": "Homeschool Grade 1/2 Ballet", "day": "Wednesday", "dayOrder": 3, "startTime": "11:00 AM", "endTime": "11:45 AM", "timeLabel": "11:00 AM – 11:45 AM", "minAge": 6, "maxAge": 10, "ageLabel": "Ages 6–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 13}, {"title": "Homeschool Grade 3/4 Ballet", "day": "Wednesday", "dayOrder": 3, "startTime": "11:45 AM", "endTime": "12:30 PM", "timeLabel": "11:45 AM – 12:30 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "conditional", "assessmentNote": "Ages 7–10 require assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 14}, {"title": "Homeschool Jazz", "day": "Wednesday", "dayOrder": 3, "startTime": "12:30 PM", "endTime": "1:15 PM", "timeLabel": "12:30 PM – 1:15 PM", "minAge": 6, "maxAge": 18, "ageLabel": "Ages 6–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 15}, {"title": "Homeschool Lyrical", "day": "Wednesday", "dayOrder": 3, "startTime": "1:15 PM", "endTime": "2:00 PM", "timeLabel": "1:15 PM – 2:00 PM", "minAge": 6, "maxAge": 18, "ageLabel": "Ages 6–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 16}, {"title": "Homeschool Acro", "day": "Wednesday", "dayOrder": 3, "startTime": "2:00 PM", "endTime": "2:45 PM", "timeLabel": "2:00 PM – 2:45 PM", "minAge": 6, "maxAge": 10, "ageLabel": "Ages 6–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 17}, {"title": "Homeschool Advanced Ballet", "day": "Wednesday", "dayOrder": 3, "startTime": "2:45 PM", "endTime": "3:30 PM", "timeLabel": "2:45 PM – 3:30 PM", "minAge": 11, "maxAge": 18, "ageLabel": "Ages 11–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 18}, {"title": "Homeschool Pointe", "day": "Wednesday", "dayOrder": 3, "startTime": "3:30 PM", "endTime": "4:15 PM", "timeLabel": "3:30 PM – 4:15 PM", "minAge": 11, "maxAge": 18, "ageLabel": "Ages 11–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 19}, {"title": "Starlight Acro / Jazz", "day": "Wednesday", "dayOrder": 3, "startTime": "4:30 PM", "endTime": "5:15 PM", "timeLabel": "4:30 PM – 5:15 PM", "minAge": 4, "maxAge": 6, "ageLabel": "Ages 4–6", "assessmentType": "conditional", "assessmentNote": "Age 4 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 20}, {"title": "Level 1 Acro", "day": "Wednesday", "dayOrder": 3, "startTime": "5:15 PM", "endTime": "6:00 PM", "timeLabel": "5:15 PM – 6:00 PM", "minAge": 6, "maxAge": 10, "ageLabel": "Ages 6–10", "assessmentType": "conditional", "assessmentNote": "Age 6 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 21}, {"title": "Junior Hip-Hop", "day": "Wednesday", "dayOrder": 3, "startTime": "6:00 PM", "endTime": "6:45 PM", "timeLabel": "6:00 PM – 6:45 PM", "minAge": 5, "maxAge": 10, "ageLabel": "Ages 5–10", "assessmentType": "conditional", "assessmentNote": "Age 5 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 22}, {"title": "Level 2 Acro", "day": "Wednesday", "dayOrder": 3, "startTime": "6:45 PM", "endTime": "7:30 PM", "timeLabel": "6:45 PM – 7:30 PM", "minAge": 6, "maxAge": 18, "ageLabel": "Ages 6–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 23}, {"title": "Senior Hip-Hop", "day": "Wednesday", "dayOrder": 3, "startTime": "7:30 PM", "endTime": "8:15 PM", "timeLabel": "7:30 PM – 8:15 PM", "minAge": 10, "maxAge": 18, "ageLabel": "Ages 10–18", "assessmentType": "conditional", "assessmentNote": "Age 10 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 24}, {"title": "Level 3 Acro", "day": "Wednesday", "dayOrder": 3, "startTime": "8:15 PM", "endTime": "9:00 PM", "timeLabel": "8:15 PM – 9:00 PM", "minAge": 6, "maxAge": 18, "ageLabel": "Ages 6–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 25}, {"title": "Pre-Starlight Ballet / Tap", "day": "Thursday", "dayOrder": 4, "startTime": "3:45 PM", "endTime": "4:30 PM", "timeLabel": "3:45 PM – 4:30 PM", "minAge": 2, "maxAge": 4, "ageLabel": "Ages 2–4", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 26}, {"title": "Junior Jazz", "day": "Thursday", "dayOrder": 4, "startTime": "4:30 PM", "endTime": "5:15 PM", "timeLabel": "4:30 PM – 5:15 PM", "minAge": 6, "maxAge": 10, "ageLabel": "Ages 6–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 27}, {"title": "Level 1 Tap", "day": "Thursday", "dayOrder": 4, "startTime": "5:15 PM", "endTime": "6:00 PM", "timeLabel": "5:15 PM – 6:00 PM", "minAge": 6, "maxAge": 10, "ageLabel": "Ages 6–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 28}, {"title": "Level 2 Tap", "day": "Thursday", "dayOrder": 4, "startTime": "6:00 PM", "endTime": "6:45 PM", "timeLabel": "6:00 PM – 6:45 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "conditional", "assessmentNote": "Ages 7–10 require assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 29}, {"title": "Level 3 Tap", "day": "Thursday", "dayOrder": 4, "startTime": "6:45 PM", "endTime": "7:30 PM", "timeLabel": "6:45 PM – 7:30 PM", "minAge": 10, "maxAge": 18, "ageLabel": "Ages 10–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 30}, {"title": "Senior Jazz", "day": "Thursday", "dayOrder": 4, "startTime": "7:30 PM", "endTime": "8:15 PM", "timeLabel": "7:30 PM – 8:15 PM", "minAge": 10, "maxAge": 18, "ageLabel": "Ages 10–18", "assessmentType": "conditional", "assessmentNote": "Age 10 requires assessment.", "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 31}, {"title": "Boys Technique", "day": "Thursday", "dayOrder": 4, "startTime": "8:15 PM", "endTime": "9:00 PM", "timeLabel": "8:15 PM – 9:00 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 32}, {"title": "Company Rehearsals", "day": "Friday", "dayOrder": 5, "startTime": "3:30 PM", "endTime": "4:30 PM", "timeLabel": "3:30 PM – 4:30 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 60, "sortOrder": 33}, {"title": "Company Rehearsals", "day": "Friday", "dayOrder": 5, "startTime": "4:30 PM", "endTime": "5:30 PM", "timeLabel": "4:30 PM – 5:30 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "full", "assessmentNote": "Assessment required.", "trialAvailable": false, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 60, "sortOrder": 34}, {"title": "Primary Highland", "day": "Friday", "dayOrder": 5, "startTime": "5:30 PM", "endTime": "6:15 PM", "timeLabel": "5:30 PM – 6:15 PM", "minAge": 4, "maxAge": 6, "ageLabel": "Ages 4–6", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 35}, {"title": "Pre-Premier Highland", "day": "Friday", "dayOrder": 5, "startTime": "6:15 PM", "endTime": "7:00 PM", "timeLabel": "6:15 PM – 7:00 PM", "minAge": 7, "maxAge": 18, "ageLabel": "Ages 7–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 36}, {"title": "Musical Theatre Vocals (Junior)", "day": "Saturday", "dayOrder": 6, "startTime": "9:00 AM", "endTime": "9:45 AM", "timeLabel": "9:00 AM – 9:45 AM", "minAge": 5, "maxAge": 10, "ageLabel": "Ages 5–10", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 37}, {"title": "Musical Theatre Acting", "day": "Saturday", "dayOrder": 6, "startTime": "9:45 AM", "endTime": "10:30 AM", "timeLabel": "9:45 AM – 10:30 AM", "minAge": 5, "maxAge": 18, "ageLabel": "Ages 5–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 38}, {"title": "Musical Theatre Vocals (Senior)", "day": "Saturday", "dayOrder": 6, "startTime": "10:30 AM", "endTime": "11:15 AM", "timeLabel": "10:30 AM – 11:15 AM", "minAge": 11, "maxAge": 18, "ageLabel": "Ages 11–18", "assessmentType": "none", "assessmentNote": NaN, "trialAvailable": true, "bookingLink": NaN, "shortDescription": NaN, "fullDescription": NaN, "image": NaN, "teacherName": NaN, "studio": NaN, "durationMinutes": 45, "sortOrder": 39}];
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  const classes = eligibility[age] || [];
-  const allowed = classes.map(normalize);
+    function needsAssessmentForAge(item, age) {
+      if (age < Number(item.minAge) || age > Number(item.maxAge)) return false;
 
-  document.querySelectorAll("td").forEach(td => {
-    const cellText = normalize(td.textContent.trim());
-    const candidates = (aliasMap[cellText] || [cellText]).map(normalize);
-    if (candidates.some(name => allowed.includes(name))) {
-      td.classList.add("highlight");
+      const assessmentType = String(item.assessmentType || '').toLowerCase();
+      if (assessmentType === 'full') return true;
+      if (assessmentType !== 'conditional') return false;
+
+      const note = String(item.assessmentNote || '').toLowerCase().replaceAll('–', '-');
+
+      const exactAgeMatch = note.match(/age\s+(\d+)/);
+      if (exactAgeMatch) {
+        return age === Number(exactAgeMatch[1]);
+      }
+
+      const rangeMatch = note.match(/ages?\s+(\d+)\s*-\s*(\d+)/);
+      if (rangeMatch) {
+        const min = Number(rangeMatch[1]);
+        const max = Number(rangeMatch[2]);
+        return age >= min && age <= max;
+      }
+
+      return true;
     }
-  });
-}</script>
+
+    function getHighlightClass(item, selectedAge) {
+      if (!selectedAge) return '';
+      const age = Number(selectedAge);
+      if (age < Number(item.minAge) || age > Number(item.maxAge)) return '';
+      return needsAssessmentForAge(item, age) ? 'orange' : 'yellow';
+    }
+
+    function displayTitle(title) {
+      return title === 'Intermediate/Advanced Ballet'
+        ? 'Intermediate/<br>Advanced Ballet'
+        : title;
+    }
+
+    function renderDays(selectedAge='') {
+      const container = document.getElementById('daysContainer');
+      let html = '';
+
+      for (const day of days) {
+        const dayClasses = classes.filter(item => item.day === day);
+
+        html += `<section class="day-block">`;
+        html += `<div class="day-header">${day}</div>`;
+
+        if (!dayClasses.length) {
+          html += `<div class="empty-note">No classes</div>`;
+        } else {
+          for (const item of dayClasses) {
+            const color = getHighlightClass(item, selectedAge);
+            html += `
+              <div class="class-row">
+                <div class="class-box ${color}">
+                  <div class="class-title">${displayTitle(item.title)}</div>
+                  <div class="class-time">${item.timeLabel}</div>
+                </div>
+              </div>
+            `;
+          }
+        }
+
+        html += `</section>`;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function populateAges() {
+      const select = document.getElementById('ageSelect');
+      for (let age = 2; age <= 18; age++) {
+        const option = document.createElement('option');
+        option.value = age;
+        option.textContent = age;
+        select.appendChild(option);
+      }
+
+      select.addEventListener('change', (e) => {
+        renderDays(e.target.value);
+      });
+    }
+
+    populateAges();
+    renderDays();
+  </script>
 </body>
 </html>
